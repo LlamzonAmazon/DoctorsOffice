@@ -1,3 +1,5 @@
+---This project is INCOMPLETE---
+
 This is a project for my databases class. It uses the GAUL network distributed to students by the school. 
 
 The MySQL database the webpage I've designed uses a VM given to students of the class by the professor.
