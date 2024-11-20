@@ -1,0 +1,84 @@
+/* General Styling */
+body, a {
+    background-color: #2E2E2E;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #ffffff;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+form {
+    margin: 20px 0;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 60%;
+    margin: 10px auto;
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+th, td {
+    border: 1px solid #555555;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #444444;
+}
+
+/* Center alignment for forms */
+#insertForm, #deleteForm, #updateForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#insertForm div, #deleteForm div, #updateForm div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Align labels and inputs */
+#insertForm label, #deleteForm label, #updateForm label {
+    width: 100px;
+    text-align: right;
+}
+
+#insertForm input[type="text"], 
+#deleteForm input[type="text"], 
+#updateForm input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    background-color: #222222;
+    color: #ffffff;
+}
+
+/* Buttons */
+input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #999999;
+    color: #000000;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #777777;
+}

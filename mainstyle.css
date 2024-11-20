@@ -1,0 +1,40 @@
+/* General Styling */
+body {
+    background-color: #2e2e2e; /* Dark gray background */
+    color: #ffffff; /* White text */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+    text-align: center;
+}
+
+/* Style for the Heading */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+/* Center the forms */
+form {
+    margin: 20px 0;
+}
+
+/* Style for Buttons */
+input[type="submit"] {
+    background-color: #1c1c1c; /* Darker gray for buttons */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 15px; /* Square round edges */
+    padding: 20px 40px; /* Make buttons bigger */
+    font-size: 1.5rem; /* Larger text size */
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Add subtle shadow for depth */
+}
+
+input[type="submit"]:hover {
+    background-color: #3a3a3a; /* Slightly lighter gray when hovering */
+}
