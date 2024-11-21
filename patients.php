@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Patients</title>
-    <script src="pageFunctions.js"></script>
     <style> <?php include 'style.css'; ?> </style>
 </head>
 <body>
     <h1>PATIENT DATA</h1>
+    <p>Reload page to see changes.</p>
     <form action="mainmenu.php" method="post">
         <input type="submit" value="Back to Main Menu">
     </form><br>
@@ -15,48 +15,48 @@
 
     <!-- LIST PATIENTS -->
     <h2>TABLE OF PATIENTS</h2>
+
+    <form id="listArgs" method="GET">
+        <input type="radio" name="sortOrder" value="p.firstname">First Name
+        <input type="radio" name="sortOrder" value="p.lastname">Last Name
+        <input type="radio" name="sortDir" value="ASC">Ascending
+        <input type="radio" name="sortDir" value="DESC">Descending<br>
+        <input type="submit" value="Sort">
+    </form>
+
     <table border="1" id="patientTable">
         <thead>
             <tr>
-                <th onclick="sortData('p.ohip')">OHIP</th>
-                <th onclick="sortData('p.firstname')">First Name</th>
-                <th onclick="sortData('p.lastname')">Last Name</th>
-                <th onclick="sortData('p.height')">Height (m)</th>
-                <th onclick="sortData('p.weight')">Weight (kg)</th>
-                <th onclick="sortData('d.docid')">Doctor ID</th>
-                <th onclick="sortData('d.firstname')">Doctor First Name</th>
-                <th onclick="sortData('d.lastname')">Doctor Last Name</th>
+                <th>OHIP</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Height (m)</th>
+                <th>Weight (kg)</th>
+                <th>Doctor ID</th>
+                <th>Doctor First Name</th>
+                <th>Doctor Last Name</th>
             </tr>
         </thead>
         <tbody>
             <?php
-                # Default sort order and direction
-                $sortOrder = "p.ohip";
-                $sortDir = "ASC";
+                $sortOrder = 'patient_firstname';
+                $sortDir = 'DESC';
+                $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'p.firstname'; // Default: sort by First Name
+                $sortDir = isset($_GET['sortDir']) ? $_GET['sortDir'] : 'ASC'; // Default: Ascending
 
-                // Check if a sort parameter is passed
-                if (isset($_GET['sort'])) {
-                    $allowedColumns = ['p.ohip', 'p.firstname', 'p.lastname', 'p.height', 'p.weight', 'd.docid', 'd.firstname', 'd.lastname'];
-                    if (in_array($_GET['sort'], $allowedColumns)) {
-                        $sortOrder = $_GET['sort'];
-                    }
-                }
-
-                # Query to fetch patient data based on the selected sort order and direction
                 $query = "SELECT p.ohip AS patient_ohip,
-                            p.firstname AS patient_firstname, 
-                            p.lastname AS patient_lastname, 
-                            p.height, 
-                            p.weight, 
-                            d.docid AS doctor_docid, 
-                            d.firstname AS doctor_firstname, 
-                            d.lastname AS doctor_lastname 
-                        FROM patient p 
+                            p.firstname AS patient_firstname,
+                            p.lastname AS patient_lastname,
+                            p.height,
+                            p.weight,
+                            d.docid AS doctor_docid,
+                            d.firstname AS doctor_firstname,
+                            d.lastname AS doctor_lastname
+                        FROM patient p
                         JOIN doctor d ON p.treatsdocid=d.docid 
                         ORDER BY $sortOrder $sortDir";
                 $result = mysqli_query($connection, $query);
 
-                # Display patient data
                 if ($result) {
                     while($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>
@@ -109,6 +109,7 @@
                     console.error('Error:', error);
                 });
         });
+
     </script>
 
 
@@ -116,27 +117,28 @@
     <h2>DELETE PATIENT</h2>
 
     <form id="deleteForm" method="post">
-        <div><label for="ohip">OHIP:</label> <input type="text" name="ohip"></div>
-        <input type="submit" id="deleteBtn" value="Delete Patient">
+        <div>
+            <label for="ohip">OHIP:</label> 
+            <input type="text" name="ohip">
+        </div>
+        <input type="button" id="deleteBtn" value="Delete Patient">
     </form>
 
     <div id="deleteResponse"></div>
 
     <script>
         document.getElementById('deleteBtn').addEventListener('click', function () {
-            const formData = new FormData(document.getElementById('deleteForm'));
 
-            fetch('deletePatient.php', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('deleteResponse').innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            const confirmDelete = confirm("Are you sure you want to delete this patient?");
+            
+            if (confirmDelete) {
+                const formData = new FormData(document.getElementById('deleteForm'));
+
+                fetch('deletePatient.php', { method: 'POST', body: formData })
+                    .then(response => response.text())
+                    .then(data => { document.getElementById('deleteResponse').innerHTML = data; })
+                    .catch(error => { console.error('Error:', error); });
+            }
         });
     </script>
 

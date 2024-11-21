@@ -70,15 +70,18 @@ th {
 }
 
 /* Buttons */
-input[type="submit"] {
+input[type="submit"], 
+input[type="button"] {
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
     background-color: #999999;
     color: #000000;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, 
+input[type="button"]:hover {
     background-color: #777777;
 }
