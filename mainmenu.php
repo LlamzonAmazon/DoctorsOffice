@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!-- Main menu page. Used to guide the user into either one of the main categories of action.  -->
 <head>
     <title>Main Menu</title>
     <link rel="stylesheet" href="mainstyle.css">

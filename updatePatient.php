@@ -1,4 +1,5 @@
 <?php
+    // Code for updating the patient weight
     include 'connectDB.php';
 
     // Check if the request method is POST
@@ -11,7 +12,7 @@
 
             // weight value must be positive
             if ($weight <= 0) {
-                echo "Error: Weight must be a positive value.";
+                echo "Invalid weight value.";
                 exit;
             }
 

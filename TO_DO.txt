@@ -1,0 +1,4 @@
+### FEATURES TO ADD/FIX ###
+ - Make table column titles sort table attribute and direction
+ - Move javascript code in .php files to a .js file
+ - Implement SQL injection safeguards

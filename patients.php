@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
+<!-- Code to structure the patients page accessible from the main menu  -->
 <head>
     <title>Patients</title>
     <style> <?php include 'style.css'; ?> </style>
 </head>
 <body>
     <h1>PATIENT DATA</h1>
-    <p>Reload page to see changes.</p>
     <form action="mainmenu.php" method="post">
         <input type="submit" value="Back to Main Menu">
-    </form><br>
+    </form>
 
     <?php include 'connectDB.php'; ?>
 
@@ -77,7 +77,7 @@
         </tbody>
     </table>
 
-
+    <br>
     <!-- INSERT NEW PATIENT -->
     <h2>INSERT NEW PATIENT</h2>
 
@@ -88,26 +88,20 @@
         <div><label for="height">Height (m):</label> <input type="text" name="height"></div>
         <div><label for="weight">Weight (kg):</label> <input type="text" name="weight"></div>
         <div><label for="docid">Doctor ID:</label> <input type="text" name="docid"></div>
-        <input type="submit" id="submitBtn" value="Insert Patient">
+        <input type="button" id="insertBtn" value="Insert Patient">
     </form>
 
-    <div id="response"></div>
+    <div id="insertResponse"></div>
 
     <script>
-        document.getElementById('submitBtn').addEventListener('click', function () {
-            const formData = new FormData(document.getElementById('insertForm'));
+        document.getElementById('insertBtn').addEventListener('click', function () {
 
-            fetch('insertPatient.php', {
-                method: 'POST',
-                body: formData,
-            })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('response').innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                const formData = new FormData(document.getElementById('insertForm'));
+
+                fetch('insertPatient.php', { method: 'POST', body: formData })
+                    .then(response => response.text())
+                    .then(data => { document.getElementById('insertResponse').innerHTML = data; })
+                    .catch(error => { console.error('Error:', error); });
         });
 
     </script>
@@ -153,17 +147,15 @@
             <input type="radio" name="units" value="kg">kg
             <input type="radio" name="units" value="lbs">lbs
         </div>
-        <input type="submit" id="updateBtn" value="Update Patient">
+        <input type="button" id="updateBtn" value="Update Patient">
     </form>
 
     <div id="updateResponse"></div>
 
     <script>
         document.getElementById('updateBtn').addEventListener('click', function() {
-            // Collect form data
             const formData = new FormData(document.getElementById('updateForm'));
 
-            // Send the data to updatePatient.php using POST
             fetch('updatePatient.php', {method:'POST',body:formData})
             .then(response => response.text())
             .then(data => {document.getElementById('updateResponse').innerHTML = data;})
@@ -175,10 +167,13 @@
     </script>
 
     <?php
-        # Free result set
+        // FREE RESULT SET
         mysqli_free_result($result);
-        # Close database connection
+        // DISCONNECT FROM DATABASE
         mysqli_close($connection);
     ?>
+
+<footer><div style="height: 150px;"></div></footer>
+
 </body>
 </html>

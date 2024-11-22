@@ -1,9 +1,11 @@
 <?php
+    // PHP code to delete a patient
     include 'connectDB.php';
 
     // Check if a POST request was made
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['ohip']) && !empty($_POST['ohip'])) {
+
             // Used to filter bad strings in a query that can be used in a vulnerable query.
 	    // A DELETE FROM query can be exploited for malicious purposes and this function prevents that.
 	    $ohip = mysqli_real_escape_string($connection, $_POST['ohip']);
